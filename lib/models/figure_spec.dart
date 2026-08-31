@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:meta/meta.dart';
 
 /// The geometric primitives the matrix-reasoning items are drawn from.
 enum ShapeKind { circle, square, triangle, diamond, hexagon, star, arrow }

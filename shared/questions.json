@@ -1,0 +1,2381 @@
+{
+  "schemaVersion": 1,
+  "generatedFrom": "lib/data/question_bank.dart",
+  "scoring": {
+    "referenceMeanProportion": 0.55,
+    "referenceSdProportion": 0.19,
+    "scaleMean": 100.0,
+    "scaleSd": 15.0,
+    "minIndex": 55,
+    "maxIndex": 145
+  },
+  "blueprints": {
+    "full": {
+      "1": 1,
+      "2": 1,
+      "3": 2,
+      "4": 2,
+      "5": 2
+    },
+    "quick": {
+      "2": 1,
+      "3": 1,
+      "4": 1,
+      "5": 1
+    }
+  },
+  "questions": [
+    {
+      "id": "l1",
+      "category": "logical",
+      "difficulty": 1,
+      "prompt": "Who is the shortest?",
+      "correctIndex": 2,
+      "explanation": "Height order is Tom > Sam > Ana, so Ana is the shortest.",
+      "type": "text",
+      "stimulus": "Tom is taller than Sam.\nSam is taller than Ana.",
+      "options": [
+        "Tom",
+        "Sam",
+        "Ana",
+        "Cannot be determined"
+      ]
+    },
+    {
+      "id": "l10",
+      "category": "logical",
+      "difficulty": 4,
+      "prompt": "Which conclusion follows with certainty?",
+      "correctIndex": 1,
+      "explanation": "At least one musician is a teacher, and every teacher is patient, so at least one musician is patient. Nothing follows about the musicians who are not teachers.",
+      "type": "text",
+      "stimulus": "Some musicians are teachers.\nAll teachers are patient.",
+      "options": [
+        "All musicians are patient",
+        "Some musicians are patient",
+        "No musicians are patient",
+        "None of these follows with certainty"
+      ]
+    },
+    {
+      "id": "l11",
+      "category": "logical",
+      "difficulty": 4,
+      "prompt": "Six identical pumps drain a tank in 90 minutes. Working at the same rate, how long would nine pumps take?",
+      "correctIndex": 1,
+      "explanation": "The job takes 6 x 90 = 540 pump-minutes however it is shared out, so nine pumps need 540 / 9 = 60 minutes. More pumps means less time, so any answer above 90 has the relationship backwards.",
+      "type": "text",
+      "stimulus": null,
+      "options": [
+        "45 minutes",
+        "60 minutes",
+        "135 minutes",
+        "Cannot be determined"
+      ]
+    },
+    {
+      "id": "l12",
+      "category": "logical",
+      "difficulty": 4,
+      "prompt": "How many people speak both languages?",
+      "correctIndex": 0,
+      "explanation": "Adding the two counts gives 33, which is 3 more than the 30 people present. Those 3 have been counted twice, so 3 speak both.",
+      "type": "text",
+      "stimulus": "In a group of 30 people, 18 speak French and 15 speak German.\nEveryone speaks at least one of the two.",
+      "options": [
+        "3",
+        "5",
+        "12",
+        "13"
+      ]
+    },
+    {
+      "id": "l13",
+      "category": "logical",
+      "difficulty": 5,
+      "prompt": "Whose records must you check to find a violation of the rule?",
+      "correctIndex": 1,
+      "explanation": "Check the driver, to see whether a permit is missing. Check the member with no permit, to see whether they drive. The member who walks cannot break the rule, and neither can the permit holder — the rule says nothing about what a permit holder must do, so no record behind those two can violate it.",
+      "type": "text",
+      "stimulus": "Club rule: every member who drives to meetings\nmust hold a parking permit.\n\nFour member records are face down. What each\none shows is:  drives  ·  walks  ·  has a permit\n·  has no permit",
+      "options": [
+        "Drives, and has a permit",
+        "Drives, and has no permit",
+        "Drives only",
+        "Drives, has a permit, and has no permit"
+      ]
+    },
+    {
+      "id": "l14",
+      "category": "logical",
+      "difficulty": 5,
+      "prompt": "What can you conclude?",
+      "correctIndex": 1,
+      "explanation": "If A told the truth, the claim would be true and A would be a liar — a contradiction. So A lies, which makes the claim false, so they are not both liars. Since A is the liar, B must tell the truth.",
+      "type": "text",
+      "stimulus": "On this island every person either always lies\nor always tells the truth.\n\nYou meet two islanders, A and B.\nA says: \"We are both liars.\"",
+      "options": [
+        "Both are liars",
+        "A lies and B tells the truth",
+        "A tells the truth and B lies",
+        "Nothing can be concluded"
+      ]
+    },
+    {
+      "id": "l15",
+      "category": "logical",
+      "difficulty": 5,
+      "prompt": "You have 8 identical-looking coins. One is slightly heavier. Using only a balance scale, what is the fewest weighings that is guaranteed to find it?",
+      "correctIndex": 1,
+      "explanation": "Weigh 3 against 3. If they balance, the heavy coin is among the 2 set aside and a second weighing finds it. If they do not, the heavy coin is among those 3, and weighing 1 against 1 finds it. Two weighings always suffice.",
+      "type": "text",
+      "stimulus": null,
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ]
+    },
+    {
+      "id": "l16",
+      "category": "logical",
+      "difficulty": 5,
+      "prompt": "Which box holds the prize?",
+      "correctIndex": 1,
+      "explanation": "Try each box. If A holds it, statements 1 and 2 are both true — too many. If C holds it, statements 2 and 3 are both true — too many. If B holds it, only statement 3 is true, which is exactly one.",
+      "type": "text",
+      "stimulus": "One of three boxes — A, B or C — holds a prize.\nExactly one of these statements is true:\n\n1. Box A holds the prize.\n2. Box B does not hold the prize.\n3. Box A does not hold the prize.",
+      "options": [
+        "Box A",
+        "Box B",
+        "Box C",
+        "Cannot be determined"
+      ]
+    },
+    {
+      "id": "l2",
+      "category": "logical",
+      "difficulty": 1,
+      "prompt": "Which statement must be true?",
+      "correctIndex": 0,
+      "explanation": "The conclusion follows directly: what holds for every student in the class holds for Maria. Nothing is said about effort or rank.",
+      "type": "text",
+      "stimulus": "Every student in the class passed the exam.\nMaria is a student in the class.",
+      "options": [
+        "Maria passed the exam",
+        "Maria studied hard",
+        "Maria had the highest mark",
+        "Maria may have failed"
+      ]
+    },
+    {
+      "id": "l3",
+      "category": "logical",
+      "difficulty": 2,
+      "prompt": "Which statement must be true?",
+      "correctIndex": 1,
+      "explanation": "Denying the consequent denies the antecedent: if rain guarantees cancellation and there was no cancellation, there was no rain.",
+      "type": "text",
+      "stimulus": "If it rains, the match is cancelled.\nThe match was not cancelled.",
+      "options": [
+        "It rained",
+        "It did not rain",
+        "The match was postponed",
+        "Nothing can be concluded"
+      ]
+    },
+    {
+      "id": "l4",
+      "category": "logical",
+      "difficulty": 2,
+      "prompt": "Which statement must be true?",
+      "correctIndex": 0,
+      "explanation": "Snakes are inside the reptiles, and the reptiles are entirely outside the mammals, so no snake can be a mammal.",
+      "type": "text",
+      "stimulus": "No reptiles are mammals.\nAll snakes are reptiles.",
+      "options": [
+        "No snakes are mammals",
+        "Some snakes are mammals",
+        "All reptiles are snakes",
+        "Nothing can be concluded"
+      ]
+    },
+    {
+      "id": "l5",
+      "category": "logical",
+      "difficulty": 3,
+      "prompt": "In a race you overtake the runner in second place. What position are you in now?",
+      "correctIndex": 1,
+      "explanation": "You take the place of the runner you passed, so you are now second — not first, since the leader is still ahead of you.",
+      "type": "text",
+      "stimulus": null,
+      "options": [
+        "First",
+        "Second",
+        "Third",
+        "Cannot be determined"
+      ]
+    },
+    {
+      "id": "l6",
+      "category": "logical",
+      "difficulty": 3,
+      "prompt": "Five friends each shake hands with every other friend exactly once. How many handshakes take place?",
+      "correctIndex": 1,
+      "explanation": "Each of the 5 people shakes 4 hands, which counts every handshake twice: (5 x 4) / 2 = 10.",
+      "type": "text",
+      "stimulus": null,
+      "options": [
+        "5",
+        "10",
+        "20",
+        "25"
+      ]
+    },
+    {
+      "id": "l7",
+      "category": "logical",
+      "difficulty": 3,
+      "prompt": "Who finished third?",
+      "correctIndex": 2,
+      "explanation": "The three statements chain into a single order: Ravi, Mia, Jo, Ken. Third in that order is Jo.",
+      "type": "text",
+      "stimulus": "Ravi finished ahead of Mia.\nMia finished ahead of Jo.\nJo finished ahead of Ken.",
+      "options": [
+        "Ravi",
+        "Mia",
+        "Jo",
+        "Ken"
+      ]
+    },
+    {
+      "id": "l8",
+      "category": "logical",
+      "difficulty": 3,
+      "prompt": "A drawer holds 5 red socks and 5 blue socks, mixed together in the dark. What is the smallest number you must take out to be certain of having a matching pair?",
+      "correctIndex": 1,
+      "explanation": "Two socks can be one of each colour. A third must repeat one of those two colours, so three guarantees a pair.",
+      "type": "text",
+      "stimulus": null,
+      "options": [
+        "2",
+        "3",
+        "5",
+        "6"
+      ]
+    },
+    {
+      "id": "l9",
+      "category": "logical",
+      "difficulty": 4,
+      "prompt": "Which conclusion follows with certainty?",
+      "correctIndex": 3,
+      "explanation": "The flowers that fade quickly need not be the roses. The premises leave every option open, so none of the three is guaranteed.",
+      "type": "text",
+      "stimulus": "All roses are flowers.\nSome flowers fade quickly.",
+      "options": [
+        "All roses fade quickly",
+        "Some roses fade quickly",
+        "No roses fade quickly",
+        "None of these follows with certainty"
+      ]
+    },
+    {
+      "id": "n1",
+      "category": "numerical",
+      "difficulty": 1,
+      "prompt": "Which number continues the series?",
+      "correctIndex": 2,
+      "explanation": "Each term doubles the one before it, so 24 x 2 = 48.",
+      "type": "text",
+      "stimulus": "3, 6, 12, 24, ?",
+      "options": [
+        "30",
+        "36",
+        "48",
+        "60"
+      ]
+    },
+    {
+      "id": "n10",
+      "category": "numerical",
+      "difficulty": 4,
+      "prompt": "Which number continues the series?",
+      "correctIndex": 2,
+      "explanation": "Each term is one less than a square: 1-1, 4-1, 9-1, 16-1, 25-1, then 36-1 = 35.",
+      "type": "text",
+      "stimulus": "0, 3, 8, 15, 24, ?",
+      "options": [
+        "30",
+        "33",
+        "35",
+        "36"
+      ]
+    },
+    {
+      "id": "n11",
+      "category": "numerical",
+      "difficulty": 4,
+      "prompt": "Two books cost 36 together. The hardback costs 24 more than the paperback. What does the paperback cost?",
+      "correctIndex": 0,
+      "explanation": "If the paperback costs x, the hardback costs x + 24 and the pair costs 2x + 24 = 36, so x = 6. Answering 12 subtracts the difference from the total instead of splitting what is left.",
+      "type": "text",
+      "stimulus": null,
+      "options": [
+        "6",
+        "9",
+        "12",
+        "14"
+      ]
+    },
+    {
+      "id": "n12",
+      "category": "numerical",
+      "difficulty": 4,
+      "prompt": "A shop marks a coat up by 25%, then holds a sale at 20% off the marked price. Compared with the original price, the sale price is:",
+      "correctIndex": 2,
+      "explanation": "Percentages multiply rather than add: 1.25 x 0.80 = 1.00, so the sale price is exactly the original. The 20% cut is taken from the larger marked price, which is why it cancels the 25% rise.",
+      "type": "text",
+      "stimulus": null,
+      "options": [
+        "5% higher",
+        "5% lower",
+        "exactly the same",
+        "10% lower"
+      ]
+    },
+    {
+      "id": "n13",
+      "category": "numerical",
+      "difficulty": 5,
+      "prompt": "Which number continues the series?",
+      "correctIndex": 2,
+      "explanation": "Two series are interleaved. The 1st, 3rd, 5th and 7th terms run 3, 5, 7, 9 (+2). The 2nd, 4th and 6th run 8, 12, 16 (+4), so the next of those is 20.",
+      "type": "text",
+      "stimulus": "3, 8, 5, 12, 7, 16, 9, ?",
+      "options": [
+        "11",
+        "18",
+        "20",
+        "24"
+      ]
+    },
+    {
+      "id": "n14",
+      "category": "numerical",
+      "difficulty": 5,
+      "prompt": "Which number continues the series?",
+      "correctIndex": 2,
+      "explanation": "Each term is the product of the two before it: 1x2=2, 2x2=4, 2x4=8, 4x8=32, then 8x32 = 256.",
+      "type": "text",
+      "stimulus": "1, 2, 2, 4, 8, 32, ?",
+      "options": [
+        "64",
+        "128",
+        "256",
+        "320"
+      ]
+    },
+    {
+      "id": "n15",
+      "category": "numerical",
+      "difficulty": 5,
+      "prompt": "Which number continues the series?",
+      "correctIndex": 2,
+      "explanation": "Each term adds the next square: +4, +9, +16, +25, then +36. So 55 + 36 = 91. These are the running totals of 1, 4, 9, 16...",
+      "type": "text",
+      "stimulus": "1, 5, 14, 30, 55, ?",
+      "options": [
+        "78",
+        "85",
+        "91",
+        "96"
+      ]
+    },
+    {
+      "id": "n16",
+      "category": "numerical",
+      "difficulty": 5,
+      "prompt": "Which number continues the series?",
+      "correctIndex": 2,
+      "explanation": "Each term is n squared times (n + 1): 1x2, 4x3, 9x4, 16x5, 25x6, then 36x7 = 252.",
+      "type": "text",
+      "stimulus": "2, 12, 36, 80, 150, ?",
+      "options": [
+        "210",
+        "238",
+        "252",
+        "264"
+      ]
+    },
+    {
+      "id": "n2",
+      "category": "numerical",
+      "difficulty": 1,
+      "prompt": "Which number continues the series?",
+      "correctIndex": 2,
+      "explanation": "Each term is half the one before it, so 8 / 2 = 4.",
+      "type": "text",
+      "stimulus": "64, 32, 16, 8, ?",
+      "options": [
+        "0",
+        "2",
+        "4",
+        "6"
+      ]
+    },
+    {
+      "id": "n3",
+      "category": "numerical",
+      "difficulty": 2,
+      "prompt": "Which number continues the series?",
+      "correctIndex": 2,
+      "explanation": "This is the Fibonacci sequence: each term is the sum of the two before it, so 5 + 8 = 13.",
+      "type": "text",
+      "stimulus": "1, 1, 2, 3, 5, 8, ?",
+      "options": [
+        "11",
+        "12",
+        "13",
+        "15"
+      ]
+    },
+    {
+      "id": "n4",
+      "category": "numerical",
+      "difficulty": 2,
+      "prompt": "Which number continues the series?",
+      "correctIndex": 2,
+      "explanation": "The gaps grow by one each time: 2, 3, 4, 5, then 6. So 15 + 6 = 21. These are the triangular numbers.",
+      "type": "text",
+      "stimulus": "1, 3, 6, 10, 15, ?",
+      "options": [
+        "18",
+        "20",
+        "21",
+        "24"
+      ]
+    },
+    {
+      "id": "n5",
+      "category": "numerical",
+      "difficulty": 3,
+      "prompt": "Which number continues the series?",
+      "correctIndex": 2,
+      "explanation": "The series alternates +3 and -2: 7, 10, 8, 11, 9. The next step is +3, giving 12.",
+      "type": "text",
+      "stimulus": "7, 10, 8, 11, 9, ?",
+      "options": [
+        "7",
+        "10",
+        "12",
+        "13"
+      ]
+    },
+    {
+      "id": "n6",
+      "category": "numerical",
+      "difficulty": 3,
+      "prompt": "Which number continues the series?",
+      "correctIndex": 2,
+      "explanation": "The terms are n squared plus 1 for n = 1, 2, 3...; equivalently the gaps grow 3, 5, 7, 9, 11. So 26 + 11 = 37.",
+      "type": "text",
+      "stimulus": "2, 5, 10, 17, 26, ?",
+      "options": [
+        "35",
+        "36",
+        "37",
+        "38"
+      ]
+    },
+    {
+      "id": "n7",
+      "category": "numerical",
+      "difficulty": 3,
+      "prompt": "Which number continues the series?",
+      "correctIndex": 3,
+      "explanation": "Each term is double the previous term plus 1: 39 x 2 + 1 = 79.",
+      "type": "text",
+      "stimulus": "4, 9, 19, 39, ?",
+      "options": [
+        "59",
+        "69",
+        "78",
+        "79"
+      ]
+    },
+    {
+      "id": "n8",
+      "category": "numerical",
+      "difficulty": 3,
+      "prompt": "Which number continues the series?",
+      "correctIndex": 2,
+      "explanation": "Each term is n x (n + 1): 1x2, 2x3, 3x4, 4x5, 5x6, then 6x7 = 42. Equivalently the gaps grow 4, 6, 8, 10, 12.",
+      "type": "text",
+      "stimulus": "2, 6, 12, 20, 30, ?",
+      "options": [
+        "36",
+        "40",
+        "42",
+        "44"
+      ]
+    },
+    {
+      "id": "n9",
+      "category": "numerical",
+      "difficulty": 4,
+      "prompt": "Which number continues the series?",
+      "correctIndex": 3,
+      "explanation": "Each term is multiplied by the next whole number: x2, x3, x4, x5, then x6. So 120 x 6 = 720.",
+      "type": "text",
+      "stimulus": "1, 2, 6, 24, 120, ?",
+      "options": [
+        "240",
+        "360",
+        "600",
+        "720"
+      ]
+    },
+    {
+      "id": "s1",
+      "category": "spatial",
+      "difficulty": 1,
+      "prompt": "Which figure completes the matrix?",
+      "correctIndex": 2,
+      "explanation": "The shape is fixed by the row (circle, square, triangle) and the count by the column (one, two, three). The last cell is therefore three outlined triangles.",
+      "type": "matrix",
+      "grid": [
+        {
+          "shape": "circle",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 2,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 3,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 2,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 3,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "triangle",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "triangle",
+          "count": 2,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        null
+      ],
+      "options": [
+        {
+          "shape": "triangle",
+          "count": 2,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 3,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "triangle",
+          "count": 3,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "triangle",
+          "count": 3,
+          "filled": true,
+          "rotationQuarters": 0,
+          "hasDot": false
+        }
+      ]
+    },
+    {
+      "id": "s10",
+      "category": "spatial",
+      "difficulty": 4,
+      "prompt": "Which figure completes the matrix?",
+      "correctIndex": 2,
+      "explanation": "The count doubles across each row (one, two, four) while the fill flips at every step. The bottom row runs outlined, solid, so the missing cell is four outlined circles.",
+      "type": "matrix",
+      "grid": [
+        {
+          "shape": "circle",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 2,
+          "filled": true,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 4,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 1,
+          "filled": true,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 2,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 4,
+          "filled": true,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 2,
+          "filled": true,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        null
+      ],
+      "options": [
+        {
+          "shape": "circle",
+          "count": 4,
+          "filled": true,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 3,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 4,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 2,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        }
+      ]
+    },
+    {
+      "id": "s11",
+      "category": "spatial",
+      "difficulty": 4,
+      "prompt": "Which figure completes the matrix?",
+      "correctIndex": 2,
+      "explanation": "Two rules run independently, and both are the same kind: each of the three shapes appears exactly once per row and column, and so does each of the counts one, two and three. The last row still needs a square, and still needs a count of one.",
+      "type": "matrix",
+      "grid": [
+        {
+          "shape": "circle",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 2,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "triangle",
+          "count": 3,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 3,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "triangle",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 2,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "triangle",
+          "count": 2,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 3,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        null
+      ],
+      "options": [
+        {
+          "shape": "circle",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 3,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "triangle",
+          "count": 2,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        }
+      ]
+    },
+    {
+      "id": "s12",
+      "category": "spatial",
+      "difficulty": 4,
+      "prompt": "Which figure completes the matrix?",
+      "correctIndex": 1,
+      "explanation": "In each row the third cell holds as many squares as the first minus the second: 4 - 1 = 3, 3 - 1 = 2, and 4 - 2 = 2.",
+      "type": "matrix",
+      "grid": [
+        {
+          "shape": "square",
+          "count": 4,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 3,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 3,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 2,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 4,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 2,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        null
+      ],
+      "options": [
+        {
+          "shape": "square",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 2,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 3,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 4,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        }
+      ]
+    },
+    {
+      "id": "s13",
+      "category": "spatial",
+      "difficulty": 5,
+      "prompt": "Which figure completes the matrix?",
+      "correctIndex": 1,
+      "explanation": "Three rules combine. The shape is fixed by the column, so the cell is a triangle. Counts of one, two and three appear once per row and per column, and both the last row and last column still need a one. A centre dot appears exactly when the count is odd, so the triangle carries a dot.",
+      "type": "matrix",
+      "grid": [
+        {
+          "shape": "circle",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": true
+        },
+        {
+          "shape": "square",
+          "count": 2,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "triangle",
+          "count": 3,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": true
+        },
+        {
+          "shape": "circle",
+          "count": 3,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": true
+        },
+        {
+          "shape": "square",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": true
+        },
+        {
+          "shape": "triangle",
+          "count": 2,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 2,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 3,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": true
+        },
+        null
+      ],
+      "options": [
+        {
+          "shape": "triangle",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "triangle",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": true
+        },
+        {
+          "shape": "triangle",
+          "count": 3,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": true
+        },
+        {
+          "shape": "circle",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": true
+        }
+      ]
+    },
+    {
+      "id": "s14",
+      "category": "spatial",
+      "difficulty": 5,
+      "prompt": "Which figure completes the matrix?",
+      "correctIndex": 1,
+      "explanation": "The third cell in a row is solid when exactly one of the first two is solid, and outlined when they match. Row one: outlined and solid differ, so solid. Row two: both solid, so outlined. Row three: solid and outlined differ, so the answer is solid.",
+      "type": "matrix",
+      "grid": [
+        {
+          "shape": "circle",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 1,
+          "filled": true,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 1,
+          "filled": true,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 1,
+          "filled": true,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 1,
+          "filled": true,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 1,
+          "filled": true,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        null
+      ],
+      "options": [
+        {
+          "shape": "circle",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 1,
+          "filled": true,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 1,
+          "filled": true,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": true
+        }
+      ]
+    },
+    {
+      "id": "s15",
+      "category": "spatial",
+      "difficulty": 5,
+      "prompt": "Which figure completes the matrix?",
+      "correctIndex": 2,
+      "explanation": "The third arrow in a row is the first two turned together: add the quarter turns and wrap at a full circle. Row one: 0 + 1 = 1. Row two: 2 + 3 = 5, which wraps to 1. Row three: 1 + 3 = 4, a full circle, so the arrow points right again.",
+      "type": "matrix",
+      "grid": [
+        {
+          "shape": "arrow",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "arrow",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 1,
+          "hasDot": false
+        },
+        {
+          "shape": "arrow",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 1,
+          "hasDot": false
+        },
+        {
+          "shape": "arrow",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 2,
+          "hasDot": false
+        },
+        {
+          "shape": "arrow",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 3,
+          "hasDot": false
+        },
+        {
+          "shape": "arrow",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 1,
+          "hasDot": false
+        },
+        {
+          "shape": "arrow",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 1,
+          "hasDot": false
+        },
+        {
+          "shape": "arrow",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 3,
+          "hasDot": false
+        },
+        null
+      ],
+      "options": [
+        {
+          "shape": "arrow",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 1,
+          "hasDot": false
+        },
+        {
+          "shape": "arrow",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 2,
+          "hasDot": false
+        },
+        {
+          "shape": "arrow",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "arrow",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 3,
+          "hasDot": false
+        }
+      ]
+    },
+    {
+      "id": "s16",
+      "category": "spatial",
+      "difficulty": 5,
+      "prompt": "Which figure completes the matrix?",
+      "correctIndex": 2,
+      "explanation": "Two rules combine. The third shape in a row is whichever of circle, square and triangle the first two do not use — here a square. The count is the first two added together — here 1 + 2 = 3.",
+      "type": "matrix",
+      "grid": [
+        {
+          "shape": "circle",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "triangle",
+          "count": 2,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "triangle",
+          "count": 2,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 3,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "triangle",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 2,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        null
+      ],
+      "options": [
+        {
+          "shape": "circle",
+          "count": 3,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 2,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 3,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "triangle",
+          "count": 3,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "category": "spatial",
+      "difficulty": 1,
+      "prompt": "Which figure completes the matrix?",
+      "correctIndex": 1,
+      "explanation": "The fill alternates at every step, solid then outlined, running across the rows and down the columns alike. The cell after an outlined square is a solid one.",
+      "type": "matrix",
+      "grid": [
+        {
+          "shape": "square",
+          "count": 1,
+          "filled": true,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 1,
+          "filled": true,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 1,
+          "filled": true,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 1,
+          "filled": true,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        null
+      ],
+      "options": [
+        {
+          "shape": "square",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 1,
+          "filled": true,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 1,
+          "filled": true,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "triangle",
+          "count": 1,
+          "filled": true,
+          "rotationQuarters": 0,
+          "hasDot": false
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "category": "spatial",
+      "difficulty": 2,
+      "prompt": "Which figure completes the matrix?",
+      "correctIndex": 2,
+      "explanation": "Every row and every column contains each shape exactly once. The final row already has a triangle and a circle, so the missing cell is a square.",
+      "type": "matrix",
+      "grid": [
+        {
+          "shape": "circle",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "triangle",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "triangle",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "triangle",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        null
+      ],
+      "options": [
+        {
+          "shape": "circle",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "triangle",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "diamond",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "category": "spatial",
+      "difficulty": 2,
+      "prompt": "Which figure completes the matrix?",
+      "correctIndex": 2,
+      "explanation": "The shape is fixed by the column (circle, square, triangle) and the count by the row (one, two, three) — the opposite arrangement to the first matrix in the bank. The last cell is three triangles.",
+      "type": "matrix",
+      "grid": [
+        {
+          "shape": "circle",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "triangle",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 2,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 2,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "triangle",
+          "count": 2,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 3,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 3,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        null
+      ],
+      "options": [
+        {
+          "shape": "triangle",
+          "count": 2,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 3,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "triangle",
+          "count": 3,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 3,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "category": "spatial",
+      "difficulty": 3,
+      "prompt": "Which figure completes the matrix?",
+      "correctIndex": 1,
+      "explanation": "The arrow turns a quarter turn clockwise at every step, both across a row and down a column. After three quarter turns it comes full circle and points right again.",
+      "type": "matrix",
+      "grid": [
+        {
+          "shape": "arrow",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "arrow",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 1,
+          "hasDot": false
+        },
+        {
+          "shape": "arrow",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 2,
+          "hasDot": false
+        },
+        {
+          "shape": "arrow",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 1,
+          "hasDot": false
+        },
+        {
+          "shape": "arrow",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 2,
+          "hasDot": false
+        },
+        {
+          "shape": "arrow",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 3,
+          "hasDot": false
+        },
+        {
+          "shape": "arrow",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 2,
+          "hasDot": false
+        },
+        {
+          "shape": "arrow",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 3,
+          "hasDot": false
+        },
+        null
+      ],
+      "options": [
+        {
+          "shape": "arrow",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 1,
+          "hasDot": false
+        },
+        {
+          "shape": "arrow",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "arrow",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 3,
+          "hasDot": false
+        },
+        {
+          "shape": "arrow",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 2,
+          "hasDot": false
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "category": "spatial",
+      "difficulty": 3,
+      "prompt": "Which figure completes the matrix?",
+      "correctIndex": 1,
+      "explanation": "Counts of one, two and three appear exactly once in every row and every column. The last row and last column both still need a one.",
+      "type": "matrix",
+      "grid": [
+        {
+          "shape": "circle",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 2,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 3,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 3,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 2,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 2,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 3,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        null
+      ],
+      "options": [
+        {
+          "shape": "circle",
+          "count": 3,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 2,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "circle",
+          "count": 4,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        }
+      ]
+    },
+    {
+      "id": "s7",
+      "category": "spatial",
+      "difficulty": 3,
+      "prompt": "Which figure completes the matrix?",
+      "correctIndex": 2,
+      "explanation": "In each row the third cell holds as many squares as the first two combined: 1 + 2 = 3, 2 + 1 = 3, and 1 + 3 = 4.",
+      "type": "matrix",
+      "grid": [
+        {
+          "shape": "square",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 2,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 3,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 2,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 3,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 3,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        null
+      ],
+      "options": [
+        {
+          "shape": "square",
+          "count": 2,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 3,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 4,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "square",
+          "count": 4,
+          "filled": true,
+          "rotationQuarters": 0,
+          "hasDot": false
+        }
+      ]
+    },
+    {
+      "id": "s8",
+      "category": "spatial",
+      "difficulty": 3,
+      "prompt": "Which figure completes the matrix?",
+      "correctIndex": 2,
+      "explanation": "The shape is fixed by the column (hexagon, star, diamond) and the fill by the row (outlined, solid, outlined). The last cell is an outlined diamond.",
+      "type": "matrix",
+      "grid": [
+        {
+          "shape": "hexagon",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "star",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "diamond",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "hexagon",
+          "count": 1,
+          "filled": true,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "star",
+          "count": 1,
+          "filled": true,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "diamond",
+          "count": 1,
+          "filled": true,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "hexagon",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "star",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        null
+      ],
+      "options": [
+        {
+          "shape": "diamond",
+          "count": 1,
+          "filled": true,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "star",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "diamond",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "hexagon",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        }
+      ]
+    },
+    {
+      "id": "s9",
+      "category": "spatial",
+      "difficulty": 4,
+      "prompt": "Which figure completes the matrix?",
+      "correctIndex": 2,
+      "explanation": "Two rules run at once: the triangle turns a quarter turn clockwise at each step across a row, and rows alternate solid, outlined, solid. Three quarter turns from the row start returns it upright, and the bottom row is solid.",
+      "type": "matrix",
+      "grid": [
+        {
+          "shape": "triangle",
+          "count": 1,
+          "filled": true,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "triangle",
+          "count": 1,
+          "filled": true,
+          "rotationQuarters": 1,
+          "hasDot": false
+        },
+        {
+          "shape": "triangle",
+          "count": 1,
+          "filled": true,
+          "rotationQuarters": 2,
+          "hasDot": false
+        },
+        {
+          "shape": "triangle",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 1,
+          "hasDot": false
+        },
+        {
+          "shape": "triangle",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 2,
+          "hasDot": false
+        },
+        {
+          "shape": "triangle",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 3,
+          "hasDot": false
+        },
+        {
+          "shape": "triangle",
+          "count": 1,
+          "filled": true,
+          "rotationQuarters": 2,
+          "hasDot": false
+        },
+        {
+          "shape": "triangle",
+          "count": 1,
+          "filled": true,
+          "rotationQuarters": 3,
+          "hasDot": false
+        },
+        null
+      ],
+      "options": [
+        {
+          "shape": "triangle",
+          "count": 1,
+          "filled": false,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "triangle",
+          "count": 1,
+          "filled": true,
+          "rotationQuarters": 3,
+          "hasDot": false
+        },
+        {
+          "shape": "triangle",
+          "count": 1,
+          "filled": true,
+          "rotationQuarters": 0,
+          "hasDot": false
+        },
+        {
+          "shape": "triangle",
+          "count": 1,
+          "filled": true,
+          "rotationQuarters": 1,
+          "hasDot": false
+        }
+      ]
+    },
+    {
+      "id": "v1",
+      "category": "verbal",
+      "difficulty": 1,
+      "prompt": "Bird is to Nest as Bee is to ?",
+      "correctIndex": 1,
+      "explanation": "A nest is the structure a bird lives in; a hive is the structure a bee lives in. Honey is a product, not a dwelling.",
+      "type": "text",
+      "stimulus": null,
+      "options": [
+        "Honey",
+        "Hive",
+        "Flower",
+        "Swarm"
+      ]
+    },
+    {
+      "id": "v10",
+      "category": "verbal",
+      "difficulty": 4,
+      "prompt": "Cartographer is to Map as Choreographer is to ?",
+      "correctIndex": 1,
+      "explanation": "The relation is specialist to the thing they design. A cartographer designs maps; a choreographer designs dances.",
+      "type": "text",
+      "stimulus": null,
+      "options": [
+        "Music",
+        "Dance",
+        "Costume",
+        "Theatre"
+      ]
+    },
+    {
+      "id": "v11",
+      "category": "verbal",
+      "difficulty": 4,
+      "prompt": "Drought is to Water as Famine is to ?",
+      "correctIndex": 1,
+      "explanation": "The relation is a shortage to the thing in short supply. A drought is a shortage of water; a famine is a shortage of food. Hunger is the consequence, not the thing lacking.",
+      "type": "text",
+      "stimulus": null,
+      "options": [
+        "Hunger",
+        "Food",
+        "Crops",
+        "Poverty"
+      ]
+    },
+    {
+      "id": "v12",
+      "category": "verbal",
+      "difficulty": 4,
+      "prompt": "Which word does not belong with the others?",
+      "correctIndex": 2,
+      "explanation": "Astronomy, chemistry and biology are natural sciences; alchemy is the pre-scientific tradition that chemistry replaced.",
+      "type": "text",
+      "stimulus": null,
+      "options": [
+        "Astronomy",
+        "Chemistry",
+        "Alchemy",
+        "Biology"
+      ]
+    },
+    {
+      "id": "v13",
+      "category": "verbal",
+      "difficulty": 4,
+      "prompt": "Ephemeral is to Permanent as Scarce is to ?",
+      "correctIndex": 1,
+      "explanation": "The pair are opposites: ephemeral means short-lived, permanent means lasting. The opposite of scarce is abundant. Rare and limited are near-synonyms of scarce, not its opposite.",
+      "type": "text",
+      "stimulus": null,
+      "options": [
+        "Rare",
+        "Abundant",
+        "Valuable",
+        "Limited"
+      ]
+    },
+    {
+      "id": "v14",
+      "category": "verbal",
+      "difficulty": 5,
+      "prompt": "Philately is to Stamps as Numismatics is to ?",
+      "correctIndex": 1,
+      "explanation": "Each word names the study or collection of a thing. Philately is the collecting of stamps; numismatics is the study of coins and currency.",
+      "type": "text",
+      "stimulus": null,
+      "options": [
+        "Books",
+        "Coins",
+        "Maps",
+        "Shells"
+      ]
+    },
+    {
+      "id": "v15",
+      "category": "verbal",
+      "difficulty": 5,
+      "prompt": "Which word does not belong with the others?",
+      "correctIndex": 1,
+      "explanation": "Loquacious, garrulous and voluble all describe someone who talks a great deal. Taciturn means the opposite: saying very little.",
+      "type": "text",
+      "stimulus": null,
+      "options": [
+        "Loquacious",
+        "Taciturn",
+        "Garrulous",
+        "Voluble"
+      ]
+    },
+    {
+      "id": "v16",
+      "category": "verbal",
+      "difficulty": 5,
+      "prompt": "Ostentatious is to Modest as Prodigal is to ?",
+      "correctIndex": 1,
+      "explanation": "The pair are opposites: ostentatious means showy, modest means unshowy. Prodigal means wastefully extravagant, so its opposite is frugal. Generous is close in surface meaning but is not the opposite of prodigal.",
+      "type": "text",
+      "stimulus": null,
+      "options": [
+        "Generous",
+        "Frugal",
+        "Wealthy",
+        "Careless"
+      ]
+    },
+    {
+      "id": "v17",
+      "category": "verbal",
+      "difficulty": 5,
+      "prompt": "Which word does not belong with the others?",
+      "correctIndex": 2,
+      "explanation": "Ameliorate, assuage and mitigate all mean to make something less bad. Exacerbate means to make it worse.",
+      "type": "text",
+      "stimulus": null,
+      "options": [
+        "Ameliorate",
+        "Assuage",
+        "Exacerbate",
+        "Mitigate"
+      ]
+    },
+    {
+      "id": "v2",
+      "category": "verbal",
+      "difficulty": 1,
+      "prompt": "Which word does not belong with the others?",
+      "correctIndex": 2,
+      "explanation": "Apple, banana and grape are fruits; a carrot is a root vegetable.",
+      "type": "text",
+      "stimulus": null,
+      "options": [
+        "Apple",
+        "Banana",
+        "Carrot",
+        "Grape"
+      ]
+    },
+    {
+      "id": "v3",
+      "category": "verbal",
+      "difficulty": 2,
+      "prompt": "Doctor is to Patient as Lawyer is to ?",
+      "correctIndex": 1,
+      "explanation": "The relation is professional to the person they serve. A doctor serves a patient; a lawyer serves a client.",
+      "type": "text",
+      "stimulus": null,
+      "options": [
+        "Judge",
+        "Client",
+        "Courtroom",
+        "Contract"
+      ]
+    },
+    {
+      "id": "v4",
+      "category": "verbal",
+      "difficulty": 2,
+      "prompt": "Which word does not belong with the others?",
+      "correctIndex": 3,
+      "explanation": "Square, triangle and circle are two-dimensional shapes; a cube is a three-dimensional solid.",
+      "type": "text",
+      "stimulus": null,
+      "options": [
+        "Square",
+        "Triangle",
+        "Circle",
+        "Cube"
+      ]
+    },
+    {
+      "id": "v5",
+      "category": "verbal",
+      "difficulty": 2,
+      "prompt": "Symphony is to Composer as Novel is to ?",
+      "correctIndex": 2,
+      "explanation": "The relation is work to its creator. A composer writes a symphony; a novelist writes a novel.",
+      "type": "text",
+      "stimulus": null,
+      "options": [
+        "Reader",
+        "Publisher",
+        "Novelist",
+        "Library"
+      ]
+    },
+    {
+      "id": "v6",
+      "category": "verbal",
+      "difficulty": 3,
+      "prompt": "Whisper is to Shout as Trickle is to ?",
+      "correctIndex": 2,
+      "explanation": "The relation is least intense to most intense form of the same thing. A shout is an intense sound; a torrent is an intense flow.",
+      "type": "text",
+      "stimulus": null,
+      "options": [
+        "Drip",
+        "Puddle",
+        "Torrent",
+        "Stream"
+      ]
+    },
+    {
+      "id": "v7",
+      "category": "verbal",
+      "difficulty": 3,
+      "prompt": "Which word does not belong with the others?",
+      "correctIndex": 3,
+      "explanation": "A sonnet, haiku and limerick are fixed poetic forms; a paragraph is a unit of prose with no set form.",
+      "type": "text",
+      "stimulus": null,
+      "options": [
+        "Sonnet",
+        "Haiku",
+        "Limerick",
+        "Paragraph"
+      ]
+    },
+    {
+      "id": "v8",
+      "category": "verbal",
+      "difficulty": 3,
+      "prompt": "Sculptor is to Marble as Poet is to ?",
+      "correctIndex": 1,
+      "explanation": "The relation is maker to the material they shape. Marble is what a sculptor works in; words are what a poet works in. Paper is what a poem is recorded on, not what it is made of.",
+      "type": "text",
+      "stimulus": null,
+      "options": [
+        "Rhyme",
+        "Words",
+        "Paper",
+        "Emotion"
+      ]
+    },
+    {
+      "id": "v9",
+      "category": "verbal",
+      "difficulty": 3,
+      "prompt": "Which word does not belong with the others?",
+      "correctIndex": 2,
+      "explanation": "Copper, iron and zinc are chemical elements; bronze is an alloy of copper and tin.",
+      "type": "text",
+      "stimulus": null,
+      "options": [
+        "Copper",
+        "Iron",
+        "Bronze",
+        "Zinc"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+@page "/test/{sittingId:guid}/{position:int?}"
+@model TakeModel
+@{
+    ViewData["Title"] = $"Question {Model.Position + 1}";
+    ViewData["MainClass"] = "narrow";
+    var remaining = Model.Sitting.Remaining;
+    var urgent = remaining <= TimeSpan.FromMinutes(2);
+}
+
+<div class="quiz-head">
+    <strong>Question @(Model.Position + 1) of @Model.Sitting.QuestionCount</strong>
+    <span class="timer @(urgent ? "urgent" : "")" id="timer"
+          data-remaining="@((int)remaining.TotalSeconds)"
+          aria-live="off">
+        @remaining.ToString(@"mm\:ss")
+    </span>
+</div>
+<div class="progress" role="progressbar" aria-valuenow="@(Model.Position + 1)"
+     aria-valuemin="1" aria-valuemax="@Model.Sitting.QuestionCount">
+    <span style="width:@Model.ProgressPercent.ToString("0.##")%"></span>
+</div>
+
+<form method="post" asp-page-handler="Answer" class="card" style="margin-top:20px">
+    <input type="hidden" name="sittingId" value="@Model.Sitting.SittingId" />
+    <input type="hidden" name="position" value="@Model.Position" />
+
+    <partial name="_Question" model="Model.Display" />
+
+    <div class="nav-row">
+        @if (!Model.IsFirst)
+        {
+            <button class="btn secondary" type="submit" name="then" value="back">Back</button>
+        }
+        <button class="btn primary-wide" type="submit" name="then" value="next">
+            @(Model.IsLast ? "Finish" : "Next")
+        </button>
+    </div>
+</form>
+
+<div class="card">
+    <h2 style="font-size:.98rem">
+        @Model.Sitting.AnsweredCount of @Model.Sitting.QuestionCount answered
+    </h2>
+    <nav class="question-map" aria-label="Jump to a question">
+        @for (var i = 0; i < Model.Sitting.QuestionCount; i++)
+        {
+            var classes = (Model.Sitting.Answers[i] is not null ? "answered " : "")
+                        + (i == Model.Position ? "current" : "");
+            <a asp-page="/Take" asp-route-sittingId="@Model.Sitting.SittingId" asp-route-position="@i"
+               class="@classes.Trim()" aria-label="Question @(i + 1)">@(i + 1)</a>
+        }
+    </nav>
+    <p class="small muted" style="margin:14px 0 0">
+        <a asp-page="/Finish" asp-route-sittingId="@Model.Sitting.SittingId">Finish and submit now →</a>
+    </p>
+</div>
+
+@section Scripts {
+<script>
+  // Display only. The real deadline is the expiry stored with the sitting,
+  // so a stopped clock in the browser buys nobody any extra time.
+  (function () {
+    var el = document.getElementById('timer');
+    var left = parseInt(el.dataset.remaining, 10);
+    setInterval(function () {
+      left -= 1;
+      if (left <= 0) { location.reload(); return; }
+      if (left <= 120) el.classList.add('urgent');
+      var m = Math.floor(left / 60), s = left % 60;
+      el.textContent = String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+    }, 1000);
+  })();
+</script>
+}

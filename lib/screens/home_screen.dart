@@ -10,6 +10,7 @@ import '../state/test_controller.dart';
 import '../theme/app_theme.dart';
 import 'about_screen.dart';
 import 'history_screen.dart';
+import 'leaderboard_screen.dart';
 import 'quiz_screen.dart';
 
 /// The two sittings the app offers.
@@ -153,6 +154,8 @@ class _HomeScreenState extends State<HomeScreen> with RouteAware {
                     const SizedBox(height: 12),
                   ],
                   const SizedBox(height: 12),
+                  const _LeaderboardLink(),
+                  const SizedBox(height: 16),
                   const _WhatIsMeasured(),
                   const SizedBox(height: 16),
                   const _AboutLink(),
@@ -500,6 +503,68 @@ class _AboutLink extends StatelessWidget {
                     Text(
                       'How your questions are chosen, how the score is '
                       'computed, and what it cannot tell you.',
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: scheme.onSurfaceVariant,
+                        height: 1.4,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 8),
+              Icon(Icons.chevron_right_rounded, color: scheme.onSurfaceVariant),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// The shared board, which the website writes to as well.
+class _LeaderboardLink extends StatelessWidget {
+  const _LeaderboardLink();
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
+    return Card(
+      child: InkWell(
+        onTap: () => Navigator.of(context).push(
+          MaterialPageRoute<void>(builder: (_) => const LeaderboardScreen()),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(18),
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: scheme.primary.withValues(alpha: 0.12),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Icon(
+                  Icons.leaderboard_outlined,
+                  size: 20,
+                  color: scheme.primary,
+                ),
+              ),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Global leaderboard',
+                      style: theme.textTheme.titleSmall?.copyWith(
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      'One board shared with the website. Submit a full '
+                      'assessment to take a place on it.',
                       style: theme.textTheme.bodySmall?.copyWith(
                         color: scheme.onSurfaceVariant,
                         height: 1.4,

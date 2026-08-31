@@ -1,0 +1,203 @@
+@page "/about"
+@model AboutModel
+@{
+    ViewData["Title"] = "How it works";
+    ViewData["MainClass"] = "narrow";
+}
+
+<section class="hero">
+    <h1>Everything behind the number</h1>
+    <p>
+        Which items you get, why they are weighted the way they are, how the score
+        is computed, and what it can and cannot tell you.
+    </p>
+</section>
+
+<div class="card" style="margin-top:24px">
+    <h2>What it measures</h2>
+    <p style="margin-top:0">
+        Four reasoning domains, sampled equally. Each contributes the same number
+        of items and the same number of available points, so no single kind of
+        thinking dominates the result.
+    </p>
+    <div class="stack">
+        @foreach (var category in Enum.GetValues<QuestionCategory>())
+        {
+            <div>
+                <span class="chip @category.ToString().ToLowerInvariant()">@category.Label()</span>
+                <span class="muted small">@category.Description()</span>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="card">
+    <h2>How your sitting is chosen</h2>
+    <p>
+        The app holds a pool of @Model.PoolSize items. A sitting is not the whole
+        pool — it is a fresh sample drawn from it, so two attempts are made of
+        largely different questions.
+    </p>
+    <p>
+        Sampling at random would make scores incomparable: draw an easy set one day
+        and a hard set the next and the number moves for reasons that have nothing
+        to do with you. So the draw follows a fixed blueprint. It takes a set number
+        of items at each difficulty, from each domain, every single time.
+    </p>
+    <p>
+        The consequence is the point: the item mix changes between sittings, but the
+        shape of the test does not. The same number of easy, medium and hard items,
+        the same points available, the same balance across the four domains.
+    </p>
+    <div class="notice info">
+        Every difficulty band holds at least twice as many items as a sitting draws
+        from it. That surplus is spent deliberately: the draw holds back everything
+        your last attempt used, so two consecutive sittings share no questions at
+        all. Seeing an item again would measure memory rather than reasoning.
+    </div>
+</div>
+
+<div class="card">
+    <h2>The blueprint</h2>
+    <p style="margin-top:0" class="small muted">
+        Items drawn from each domain, at each difficulty. Multiply by four domains
+        for the totals.
+    </p>
+    <div class="table-wrap">
+        <table class="board">
+            <thead>
+                <tr>
+                    <th scope="col">Difficulty</th>
+                    <th scope="col">Full</th>
+                    <th scope="col">Quick</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (var difficulty = 1; difficulty <= 5; difficulty++)
+                {
+                    <tr>
+                        <td>@difficulty@(difficulty == 1 ? " · easiest" : difficulty == 5 ? " · hardest" : "")</td>
+                        <td class="tabular">@(Model.Full.DrawnAt(difficulty) is 0 ? "—" : Model.Full.DrawnAt(difficulty).ToString())</td>
+                        <td class="tabular">@(Model.Quick.DrawnAt(difficulty) is 0 ? "—" : Model.Quick.DrawnAt(difficulty).ToString())</td>
+                    </tr>
+                }
+                <tr>
+                    <td><strong>Items</strong></td>
+                    <td class="tabular"><strong>@Model.Full.ItemCount</strong></td>
+                    <td class="tabular"><strong>@Model.Quick.ItemCount</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>Points available</strong></td>
+                    <td class="tabular"><strong>@Model.Full.MaxWeight</strong></td>
+                    <td class="tabular"><strong>@Model.Quick.MaxWeight</strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <p class="small muted">
+        The short form skips the easiest band. Items almost everyone gets right
+        separate nobody, so with only four items per domain to spend, they are
+        spent higher up the range. It is also why the short form is not ranked.
+    </p>
+</div>
+
+<div class="card">
+    <h2>How the score is computed</h2>
+    <p style="margin-top:0">
+        Items are not worth the same. Each carries a weight equal to its difficulty,
+        1 through 5, so a hard item earns five times what an easy one does.
+    </p>
+    <p>
+        A full sitting therefore has @Model.Full.MaxWeight weighted points available
+        — the same @Model.Full.MaxWeight every time, which is what the fixed
+        blueprint buys you. Your weighted points are divided by that total to give a
+        proportion between 0 and 1. An unanswered item scores nothing, the same as a
+        wrong one.
+    </p>
+    <div class="stimulus" style="text-align:left">p = points earned / points available
+z = (p - 0.55) / 0.19
+score = 100 + 15z</div>
+    <p>
+        That places you on the deviation scale used by conventional IQ tests: an
+        average score is 100, and 15 points is one standard deviation. The result is
+        clamped to 55–145, because a test of this length cannot honestly separate
+        the extreme tails.
+    </p>
+    <div class="notice info">
+        The two constants in that formula — an average of 0.55 of the available
+        points, and a spread of 0.19 — are assumed, not measured. Deriving them
+        properly needs a large sample of real takers, which this does not have. They
+        set the scale; they are not a finding about anybody.
+    </div>
+</div>
+
+<div class="card">
+    <h2>How the leaderboard is kept honest</h2>
+    <p style="margin-top:0">
+        No score is ever accepted from a client. The web test is issued by the
+        server, which remembers exactly which items it showed you and scores your
+        answers itself. The mobile app draws its own sitting so it can work
+        offline, so it submits the items it used along with what you answered —
+        and the server checks that set really is a valid sitting before scoring it
+        against its own copy of the bank.
+    </p>
+    <p class="small muted" style="margin-bottom:0">
+        There are no accounts, so this is not proof against a determined forger who
+        already knows the answers. It does mean the number beside your name is one
+        the server worked out, not one you sent it.
+    </p>
+</div>
+
+<div class="card">
+    <h2>Where the questions come from</h2>
+    <p style="margin-top:0">
+        Every item was written for this project. The number series use standard
+        mathematics — Fibonacci, squares, factorials — and the logic items use
+        standard argument forms that appear in any textbook. The analogies and the
+        matrices are original.
+    </p>
+    <p>
+        The matrices are in the style of Raven's Progressive Matrices, but they are
+        not Raven's items. Nothing here is copied from Raven's, the Wechsler scales,
+        or any commercial or clinical test. Those are copyrighted, and the clinical
+        ones depend on their items staying out of circulation to keep working.
+    </p>
+    <p class="small muted" style="margin-bottom:0">
+        The bank is generated from one shared file that both this site and the
+        mobile app are built from, so the two ask the same questions and weight
+        them the same way.
+    </p>
+</div>
+
+<div class="card">
+    <h2>What it cannot tell you</h2>
+    <h3>It is not normed.</h3>
+    <p class="muted">
+        A real test is calibrated against thousands of people. This one is
+        calibrated against an assumption. The scale is internally consistent, so
+        comparing your own attempts is meaningful; comparing your number to a
+        clinically measured one is not.
+    </p>
+    <h3>The difficulty ratings are editorial.</h3>
+    <p class="muted">
+        Each item was rated 1 to 5 by judgement, not by measuring how many people
+        actually get it right. Since difficulty is also the scoring weight, those
+        judgements feed straight into the result.
+    </p>
+    <h3>Practice moves the number.</h3>
+    <p class="muted">
+        Scores tend to rise across sittings as the formats become familiar, even
+        without any change in ability. Fresh items on every attempt reduce that
+        effect but do not remove it.
+    </p>
+    <h3>It is a narrow sample.</h3>
+    <p class="muted">
+        Thirty-two items in twenty-five minutes touch a small part of what reasoning
+        involves, and nothing of memory, attention, creativity or knowledge.
+    </p>
+    <h3>It is not a diagnosis.</h3>
+    <p class="muted" style="margin-bottom:0">
+        Nothing here is a clinical instrument, and no decision worth making should
+        rest on it. Treat it as a puzzle set that keeps score.
+    </p>
+</div>

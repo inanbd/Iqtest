@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@(ViewData["Title"] is null ? "Cognitive Index" : ViewData["Title"] + " · Cognitive Index")</title>
+    <meta name="description" content="A timed reasoning assessment across four domains, scored on the familiar 100-point scale." />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>" />
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" asp-page="/Index">
+            <span class="brand-mark" aria-hidden="true">◒</span>
+            <span>Cognitive Index</span>
+        </a>
+        <nav>
+            <a asp-page="/Leaderboard">Leaderboard</a>
+            <a asp-page="/About">How it works</a>
+        </nav>
+    </header>
+
+    <main class="@ViewData["MainClass"]">
+        @RenderBody()
+    </main>
+
+    <footer class="site-footer">
+        <p>
+            A practice exercise for entertainment and self-comparison. Not a clinical
+            instrument, and its scores are not a diagnosis.
+        </p>
+        <p class="muted">
+            <a asp-page="/About">How scoring works</a> ·
+            <a asp-page="/Leaderboard">Leaderboard</a>
+        </p>
+    </footer>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

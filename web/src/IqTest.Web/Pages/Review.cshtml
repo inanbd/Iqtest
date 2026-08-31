@@ -1,0 +1,46 @@
+@page "/test/{sittingId:guid}/review"
+@model ReviewModel
+@{
+    ViewData["Title"] = "Review";
+    ViewData["MainClass"] = "narrow";
+}
+
+<h1 style="margin-top:8px">Review</h1>
+
+@if (Model.Questions.Count == 0)
+{
+    <div class="card">
+        <p style="margin:0">There is nothing to review — this test has not been submitted.</p>
+    </div>
+}
+else
+{
+    <p class="muted">@Model.Missed of @Model.Questions.Count missed.</p>
+
+    @for (var i = 0; i < Model.Questions.Count; i++)
+    {
+        var item = Model.Questions[i];
+        <details class="card" @(item.IsCorrect ? "" : "open")>
+            <summary style="cursor:pointer;font-weight:700">
+                Question @(i + 1) · @item.Question.Category.Label()
+                <span class="small" style="color:@(item.IsCorrect ? "var(--success)" : "var(--error)")">
+                    @(item.IsCorrect ? "Correct" : item.SelectedIndex is null ? "Not answered" : "Incorrect")
+                </span>
+            </summary>
+
+            <div style="margin-top:16px">
+                <partial name="_Question" model="@(new QuestionDisplay
+                        {
+                            Question = item.Question,
+                            SelectedIndex = item.SelectedIndex,
+                            CorrectIndex = item.CorrectIndex,
+                        })" />
+            </div>
+
+            <div class="notice info" style="margin-top:18px">
+                <strong>Why</strong><br />
+                @item.Explanation
+            </div>
+        </details>
+    }
+}

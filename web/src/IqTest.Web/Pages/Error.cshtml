@@ -1,0 +1,20 @@
+@page "/Error/{code:int?}"
+@model ErrorModel
+@{
+    ViewData["Title"] = Model.Title;
+    ViewData["MainClass"] = "narrow";
+}
+
+<div class="card" style="margin-top:32px">
+    <h1 style="margin-top:0">@Model.Title</h1>
+    @if (!string.IsNullOrWhiteSpace(Model.Detail))
+    {
+        <div class="notice error">@Model.Detail</div>
+    }
+    <p class="muted">
+        @(Model.StatusCode == 404
+            ? "The link may be mistyped, or the certificate it pointed at may never have existed."
+            : "Try again, or start a fresh test.")
+    </p>
+    <a class="btn" asp-page="/Index">Back to the start</a>
+</div>

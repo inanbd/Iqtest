@@ -1,0 +1,76 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = null;
+}
+
+<section class="hero">
+    <h1>Cognitive Index</h1>
+    <p>
+        A timed reasoning assessment across four domains, scored on the familiar
+        100-point scale. Finish it and you get a certificate with its own address,
+        and a place on the global board.
+    </p>
+</section>
+
+@if (Model.Stats.RankedAttempts > 0)
+{
+    <div class="metrics" style="margin-top:24px">
+        <div class="metric">
+            <div class="value tabular">@Model.Stats.RankedAttempts</div>
+            <div class="label">Ranked entries</div>
+        </div>
+        <div class="metric">
+            <div class="value tabular">@Model.Stats.Countries</div>
+            <div class="label">Countries</div>
+        </div>
+        <div class="metric">
+            <div class="value tabular">@(Model.Stats.TopIndex?.ToString() ?? "—")</div>
+            <div class="label">Top score</div>
+        </div>
+        <div class="metric">
+            <div class="value tabular">@Model.Stats.AverageIndex.ToString("0")</div>
+            <div class="label">Average</div>
+        </div>
+    </div>
+}
+
+<h2 style="margin:32px 0 12px">Choose a format</h2>
+
+<div class="stack">
+    @foreach (var option in Model.Formats)
+    {
+        <form method="post" class="card" style="@(option.Primary ? "border-color:var(--primary)" : "")">
+            <input type="hidden" name="format" value="@option.Format" />
+            <h2 style="margin-bottom:4px">@option.Title</h2>
+            <p class="muted small" style="margin:0 0 8px">
+                @option.Blueprint.ItemCount questions · @option.Blueprint.TimeLimit.TotalMinutes minutes ·
+                @option.Blueprint.MaxWeight points available
+                @if (!option.Blueprint.IsRanked)
+                {
+                    <text>· not ranked</text>
+                }
+            </p>
+            <p style="margin:0 0 16px">@option.Blurb</p>
+            <button class="btn @(option.Primary ? "" : "secondary")" type="submit">
+                Start the @option.Title.ToLowerInvariant()
+            </button>
+        </form>
+    }
+</div>
+
+<div class="card" style="margin-top:24px">
+    <h2>What is measured</h2>
+    <div class="stack">
+        @foreach (var category in Enum.GetValues<QuestionCategory>())
+        {
+            <div>
+                <span class="chip @category.ToString().ToLowerInvariant()">@category.Label()</span>
+                <span class="muted small">@category.Description()</span>
+            </div>
+        }
+    </div>
+    <p class="small muted" style="margin-bottom:0">
+        <a asp-page="/About">How your questions are chosen and how the score is computed →</a>
+    </p>
+</div>

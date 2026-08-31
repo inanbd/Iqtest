@@ -1,0 +1,113 @@
+@page "/certificate/{slug}"
+@model CertificateModel
+@{
+    var c = Model.Certificate;
+    ViewData["Title"] = c.IsAnonymous ? "Certificate" : $"{c.DisplayName} — {c.Index}";
+    ViewData["MainClass"] = "narrow";
+}
+
+@section Scripts {
+<script>
+  document.getElementById('copy')?.addEventListener('click', async function () {
+    try {
+      await navigator.clipboard.writeText(document.getElementById('share-url').textContent.trim());
+      this.textContent = 'Copied';
+      setTimeout(() => (this.textContent = 'Copy link'), 1600);
+    } catch { /* Clipboard access can be blocked; the link is selectable anyway. */ }
+  });
+</script>
+}
+
+<article class="certificate">
+    <div class="seal" aria-hidden="true">◒</div>
+    <div class="eyebrow">CERTIFICATE OF COMPLETION</div>
+
+    @if (c.IsAnonymous)
+    {
+        <div class="name">Anonymous</div>
+        <div class="country">Submitted without a name</div>
+    }
+    else
+    {
+        <div class="name">@c.DisplayName</div>
+        <div class="country">@Model.CountryFlag @Model.CountryName</div>
+    }
+
+    <div class="score tabular">@c.Index</div>
+    <div><strong>@c.Band</strong></div>
+    <p class="muted small" style="margin:6px 0 0">
+        Higher than about @c.Percentile.ToString("0")% of the reference distribution
+    </p>
+
+    <dl>
+        <div>
+            <dt>Correct</dt>
+            <dd class="tabular">@c.Correct / @c.Total</dd>
+        </div>
+        <div>
+            <dt>Weighted</dt>
+            <dd class="tabular">@c.WeightedPoints / @c.MaxWeightedPoints</dd>
+        </div>
+        <div>
+            <dt>Time</dt>
+            <dd class="tabular">@($"{(int)c.Duration.TotalMinutes}m {c.Duration.Seconds:00}s")</dd>
+        </div>
+        <div>
+            <dt>Rank</dt>
+            <dd class="tabular">@(c.Rank is { } rank ? $"#{rank}" : "—")</dd>
+        </div>
+    </dl>
+
+    <p class="small muted" style="margin:26px 0 0">
+        @c.Format assessment · taken on @(c.Platform == IqTest.Domain.Attempts.TestPlatform.Mobile ? "mobile" : "the web") ·
+        @c.CompletedAtUtc.ToString("d MMMM yyyy")
+    </p>
+</article>
+
+<div class="card no-print">
+    <h2>By domain</h2>
+    <div class="bars">
+        @foreach (var category in c.ByCategory)
+        {
+            var key = category.Category.ToString().ToLowerInvariant();
+            <div>
+                <div class="bar-head">
+                    <span class="chip @key">@category.Category.Label()</span>
+                    <span class="count tabular">@category.Correct/@category.Total</span>
+                </div>
+                <div class="bar-track">
+                    <div class="bar-fill" style="width:@((category.Accuracy * 100).ToString("0.##"))%;background:var(--@key)"></div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="card no-print">
+    <h2>Its own address</h2>
+    <p class="small muted" style="margin-top:0">
+        This link is permanent and shareable. It is unguessable, so sharing it
+        exposes nobody else's certificate.
+    </p>
+    <div class="share">
+        <code id="share-url">@Model.ShareUrl</code>
+        <button class="btn secondary" id="copy" type="button">Copy link</button>
+    </div>
+
+    @if (!c.IsRanked)
+    {
+        <p class="small muted" style="margin-bottom:0">
+            @(c.IsAnonymous
+                ? "Submitted without a name, so this result is not on the leaderboard."
+                : "The short form is not ranked, so this result is not on the leaderboard.")
+        </p>
+    }
+</div>
+
+<div class="nav-row no-print">
+    @if (Model.SittingId is { } sittingId)
+    {
+        <a class="btn secondary" asp-page="/Review" asp-route-sittingId="@sittingId">Review every answer</a>
+    }
+    <a class="btn" asp-page="/Leaderboard">See the leaderboard</a>
+</div>

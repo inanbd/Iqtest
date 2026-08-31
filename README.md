@@ -1,10 +1,15 @@
 # Cognitive Index
 
-A timed IQ-style reasoning assessment built with Flutter. It presents items
-from four reasoning domains, scores them on the conventional deviation scale
-(mean 100, SD 15), and keeps a local history so you can compare sittings.
+A timed IQ-style reasoning assessment on two platforms that share one item
+bank, one scoring rule and one leaderboard:
 
-Runs on Android, iOS, web, macOS, Windows and Linux from one codebase.
+- a **Flutter app** for Android, iOS, web, macOS, Windows and Linux;
+- an **ASP.NET Core site** (Razor Pages, Dapper over SQL Server, clean
+  architecture, CQRS via MediatR) in [`web/`](web/README.md).
+
+Both present items from four reasoning domains, score them on the conventional
+deviation scale (mean 100, SD 15), issue a certificate at its own permanent
+address, and rank everyone on a single shared board.
 
 ## What it does
 
@@ -26,7 +31,9 @@ Runs on Android, iOS, web, macOS, Windows and Linux from one codebase.
   on the reference distribution, a per-domain breakdown, and a full review of
   every item with the answer and an explanation of why.
 - **Local history** — every attempt is stored on the device with a trend line
-  across sittings. Nothing is uploaded anywhere.
+  across sittings. Nothing is uploaded unless you choose to submit.
+- **A shared leaderboard** — submit a sitting from either platform and it lands
+  on the same board, with a certificate at its own permanent link.
 
 ## How a sitting is assembled
 
@@ -58,6 +65,37 @@ returning a short test, and a test asserts the threshold still holds.
 The short form skips difficulty 1 — items almost everyone answers correctly
 separate nobody, so with four items per domain to spend they are spent higher
 up the range.
+
+## Two platforms, one source of truth
+
+The Dart bank in `lib/data/question_bank.dart` is the source. It is exported to
+`shared/questions.json`, which the ASP.NET site builds its own pool from:
+
+```bash
+dart run tool/export_questions.dart
+```
+
+`test/question_export_test.dart` fails if the committed export has drifted from
+the Dart source, and the site refuses to start if the export's scoring
+constants disagree with the ones compiled into its `DeviationScale`. So the two
+platforms cannot quietly start asking different questions or scoring them
+differently — and `test_live/` proves it end to end by scoring the same sitting
+on both and asserting the numbers match.
+
+## The leaderboard, and why it is hard to forge
+
+Neither platform ever sends a score. The site scores everything itself:
+
+- the **web** test is issued by the server, which remembers the items it showed;
+- the **app** draws its own sitting so it works offline, so it submits the item
+  ids it used with the answers — and the server checks that set really is a
+  draw the blueprint could have produced before scoring it.
+
+A payload carrying `"score": 145` is ignored. Only full 32-item sittings are
+ranked, so a lucky short form cannot outrank a real sitting, and where an email
+is given only that person's best attempt is kept.
+
+See [`web/README.md`](web/README.md) for the architecture and the API.
 
 ## Matrix items are drawn, not shipped
 
@@ -134,16 +172,39 @@ falsification of a conditional rule.
 
 ## Running it
 
+The app:
+
 ```bash
 flutter pub get
 flutter run                 # or: flutter run -d chrome
 ```
 
+Point it at a ranking service with `--dart-define`:
+
+```bash
+flutter run --dart-define=IQ_API_BASE_URL=http://127.0.0.1:5080
+```
+
+The site (which is that service):
+
+```bash
+cd web && docker compose up          # SQL Server + the site on :5080
+# or, against your own SQL Server:
+dotnet run --project web/src/IqTest.Web
+```
+
 ## Tests
 
 ```bash
-flutter analyze
-flutter test
+flutter analyze && flutter test      # the app
+cd web && dotnet test                # the site
+```
+
+Cross-platform checks need both running, so they sit outside the default run:
+
+```bash
+dotnet run --project web/src/IqTest.Web &
+flutter test test_live --dart-define=IQ_API_BASE_URL=http://127.0.0.1:5080
 ```
 
 The suite covers the scoring maths against published normal-distribution

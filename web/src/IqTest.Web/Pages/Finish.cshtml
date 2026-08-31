@@ -1,0 +1,87 @@
+@page "/test/{sittingId:guid}/finish"
+@model FinishModel
+@{
+    ViewData["Title"] = "Finish";
+    ViewData["MainClass"] = "narrow";
+    var unanswered = Model.Sitting.QuestionCount - Model.Sitting.AnsweredCount;
+}
+
+<h1 style="margin-top:8px">Ready to submit</h1>
+
+@if (Model.Expired)
+{
+    <div class="notice info" style="margin-bottom:16px">
+        Time is up. Whatever you answered will be scored; the rest count as incorrect.
+    </div>
+}
+
+<div class="card">
+    <p style="margin-top:0">
+        You answered <strong>@Model.Sitting.AnsweredCount of @Model.Sitting.QuestionCount</strong>.
+        @if (unanswered > 0)
+        {
+            <text>The @unanswered you left will be marked incorrect.</text>
+        }
+    </p>
+
+    @if (!Model.Blueprint.IsRanked)
+    {
+        <div class="notice info">
+            This is the short form, so it is not ranked. You will still get a score
+            and a certificate.
+        </div>
+    }
+
+    @if (Model.Error is not null)
+    {
+        <div class="notice error" style="margin-top:14px">@Model.Error</div>
+    }
+
+    <form method="post" style="margin-top:20px">
+        <input type="hidden" name="sittingId" value="@Model.Sitting.SittingId" />
+
+        <label class="field">
+            <span>Display name</span>
+            <input type="text" name="DisplayName" value="@Model.DisplayName" maxlength="40"
+                   autocomplete="nickname" placeholder="How you want to appear" />
+        </label>
+
+        <label class="field">
+            <span>Country</span>
+            <select name="CountryCode">
+                <option value="">Choose a country…</option>
+                @foreach (var country in Model.Countries)
+                {
+                    <option value="@country.Code" selected="@(Model.CountryCode == country.Code)">
+                        @country.Flag @country.Name
+                    </option>
+                }
+            </select>
+        </label>
+
+        <label class="field">
+            <span>Email <span class="hint">— optional</span></span>
+            <input type="email" name="Email" value="@Model.Email" maxlength="254" autocomplete="email"
+                   placeholder="you@example.com" />
+            <span class="hint small">
+                Only used to keep your best score rather than every attempt. Never shown
+                on the board, never emailed.
+            </span>
+        </label>
+
+        <button class="btn block" type="submit" name="anonymous" value="false">
+            Submit and get my certificate
+        </button>
+        <button class="btn secondary block" type="submit" name="anonymous" value="true" style="margin-top:10px">
+            Submit without being named
+        </button>
+        <p class="small muted center" style="margin:12px 0 0">
+            Submitting without a name still gives you a score and a certificate,
+            but no place on the leaderboard.
+        </p>
+    </form>
+</div>
+
+<p class="small muted" style="margin-top:16px">
+    <a asp-page="/Take" asp-route-sittingId="@Model.Sitting.SittingId" asp-route-position="0">← Back to the questions</a>
+</p>

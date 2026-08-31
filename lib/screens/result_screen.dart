@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../models/attempt.dart';
 import '../models/question.dart';
+import '../models/ranking.dart';
 import '../services/history_store.dart';
+import '../services/ranking_api.dart';
 import '../services/scoring.dart';
 import '../widgets/bell_curve.dart';
 import '../widgets/category_breakdown.dart';
+import '../widgets/submit_score_sheet.dart';
 import 'about_screen.dart';
+import 'leaderboard_screen.dart';
 import 'review_screen.dart';
 
 /// Reports the outcome of a sitting and files it in the local history.
@@ -27,10 +32,54 @@ class ResultScreen extends StatefulWidget {
 }
 
 class _ResultScreenState extends State<ResultScreen> {
+  final RankingApi _api = RankingApi();
+  SubmissionResult? _submission;
+
   @override
   void initState() {
     super.initState();
     _save();
+  }
+
+  @override
+  void dispose() {
+    _api.dispose();
+    super.dispose();
+  }
+
+  /// Sends the answers — never the score — for the service to mark itself.
+  Future<void> _submitToBoard() async {
+    final result = await showModalBottomSheet<SubmissionResult>(
+      context: context,
+      isScrollControlled: true,
+      showDragHandle: true,
+      builder: (_) => SubmitScoreSheet(
+        api: _api,
+        isRankable: widget.questions.length == 32,
+        onSubmit: (participant) => _api.submit(
+          isFullTest: widget.questions.length == 32,
+          questions: widget.questions,
+          answers: widget.answers,
+          duration: widget.result.elapsed,
+          participant: participant,
+        ),
+      ),
+    );
+
+    if (result == null || !mounted) return;
+    setState(() => _submission = result);
+  }
+
+  Future<void> _openCertificate() async {
+    final slug = _submission?.certificateSlug;
+    if (slug == null) return;
+    final uri = Uri.parse(_api.certificateUrl(slug));
+    if (!await launchUrl(uri, mode: LaunchMode.externalApplication) &&
+        mounted) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Could not open $uri')));
+    }
   }
 
   Future<void> _save() async {
@@ -157,6 +206,19 @@ class _ResultScreenState extends State<ResultScreen> {
                 ),
               ),
               const SizedBox(height: 24),
+              _BoardCard(
+                submission: _submission,
+                onSubmit: _submitToBoard,
+                onOpenCertificate: _openCertificate,
+                onOpenBoard: () => Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                    builder: (_) => LeaderboardScreen(
+                      highlightSlug: _submission?.certificateSlug,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
               FilledButton.icon(
                 onPressed: () => Navigator.of(context).push(
                   MaterialPageRoute<void>(
@@ -312,6 +374,119 @@ class _MetricTile extends StatelessWidget {
               style: theme.textTheme.bodySmall?.copyWith(
                 color: theme.colorScheme.onSurfaceVariant,
               ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// Offers the board before submission, and the certificate link after.
+class _BoardCard extends StatelessWidget {
+  const _BoardCard({
+    required this.submission,
+    required this.onSubmit,
+    required this.onOpenCertificate,
+    required this.onOpenBoard,
+  });
+
+  final SubmissionResult? submission;
+  final VoidCallback onSubmit;
+  final VoidCallback onOpenCertificate;
+  final VoidCallback onOpenBoard;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
+
+    if (submission case final result?) {
+      return Card(
+        color: scheme.primaryContainer,
+        child: Padding(
+          padding: const EdgeInsets.all(18),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Row(
+                children: [
+                  Icon(Icons.verified_rounded, color: scheme.primary),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      result.isRanked && result.rank != null
+                          ? 'Submitted — ranked #\${result.rank}'
+                          : 'Submitted',
+                      style: theme.textTheme.titleSmall?.copyWith(
+                        fontWeight: FontWeight.w700,
+                        color: scheme.onPrimaryContainer,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 6),
+              Text(
+                result.isRanked
+                    ? 'The service scored your answers at \${result.score} and '
+                          'placed you on the shared board.'
+                    : 'The service scored your answers at \${result.score}. This '
+                          'sitting is not ranked, but the certificate is yours.',
+                style: theme.textTheme.bodySmall?.copyWith(
+                  height: 1.45,
+                  color: scheme.onPrimaryContainer.withValues(alpha: 0.9),
+                ),
+              ),
+              const SizedBox(height: 14),
+              FilledButton.icon(
+                onPressed: onOpenCertificate,
+                icon: const Icon(Icons.workspace_premium_outlined, size: 18),
+                label: const Text('Open my certificate'),
+              ),
+              const SizedBox(height: 8),
+              OutlinedButton(
+                onPressed: onOpenBoard,
+                child: const Text('See the leaderboard'),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(18),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              'Join the global board',
+              style: theme.textTheme.titleSmall?.copyWith(
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              'Send your answers to be scored by the shared service, and get a '
+              'certificate with its own link. The app and the website rank on '
+              'one board.',
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: scheme.onSurfaceVariant,
+                height: 1.45,
+              ),
+            ),
+            const SizedBox(height: 14),
+            FilledButton.icon(
+              onPressed: onSubmit,
+              icon: const Icon(Icons.leaderboard_outlined, size: 18),
+              label: const Text('Submit my result'),
+            ),
+            const SizedBox(height: 8),
+            OutlinedButton(
+              onPressed: onOpenBoard,
+              child: const Text('Just show me the board'),
             ),
           ],
         ),

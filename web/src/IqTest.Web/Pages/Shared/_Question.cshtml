@@ -1,0 +1,85 @@
+@model IqTest.Web.Pages.QuestionDisplay
+@{
+    var q = Model.Question;
+    var category = q.Category.ToString().ToLowerInvariant();
+}
+
+<div class="quiz-head">
+    <span class="chip @category">@q.Category.Label()</span>
+    <span class="muted small" aria-label="Difficulty @q.Difficulty of 5">
+        Difficulty @q.Difficulty / 5
+    </span>
+</div>
+
+<h2 style="margin:8px 0 0; font-size:1.3rem; line-height:1.35">@q.Prompt</h2>
+
+@if (!string.IsNullOrEmpty(q.Stimulus))
+{
+    <div class="stimulus" style="margin-top:18px">@q.Stimulus</div>
+}
+
+@if (q.IsMatrix)
+{
+    <div class="matrix" role="group" aria-label="Three by three matrix with one cell missing">
+        @foreach (var cell in q.Grid!)
+        {
+            if (cell is null)
+            {
+                <div class="matrix-cell blank">
+                    @if (Model.RevealIndex is { } reveal)
+                    {
+                        @FigureSvg.Render(q.FigureOptions![reveal])
+                    }
+                    else
+                    {
+                        <span aria-label="The missing figure">?</span>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="matrix-cell">@FigureSvg.Render(cell)</div>
+            }
+        }
+    </div>
+}
+
+<ul class="options @(q.IsMatrix ? "figures" : "")">
+    @for (var i = 0; i < q.OptionCount; i++)
+    {
+        var letter = (char)('A' + i);
+        var state = Model.StateFor(i);
+        var checkedAttr = Model.SelectedIndex == i;
+        <li class="option @(q.IsMatrix ? "figure" : "")">
+            @if (Model.IsInteractive)
+            {
+                <input type="radio" name="selectedIndex" id="opt-@i" value="@i" checked="@checkedAttr"
+                       onchange="this.form.requestSubmit()" />
+            }
+            <label class="option-body @state" for="opt-@i">
+                <span class="option-badge">
+                    @if (state == "correct")
+                    {
+                        <text>✓</text>
+                    }
+                    else if (state == "wrong")
+                    {
+                        <text>✕</text>
+                    }
+                    else
+                    {
+                        @letter
+                    }
+                </span>
+                @if (q.IsMatrix)
+                {
+                    @FigureSvg.Render(q.FigureOptions![i])
+                }
+                else
+                {
+                    <span>@q.TextOptions![i]</span>
+                }
+            </label>
+        </li>
+    }
+</ul>
