@@ -9,6 +9,7 @@ class Attempt {
     required this.total,
     required this.duration,
     required this.categoryAccuracy,
+    this.itemIds = const [],
   });
 
   final DateTime takenAt;
@@ -20,6 +21,10 @@ class Attempt {
   /// Proportion correct (0..1) per category.
   final Map<QuestionCategory, double> categoryAccuracy;
 
+  /// Ids of the items this sitting used, so the next draw can avoid them.
+  /// Empty for attempts stored before the app began recording them.
+  final List<String> itemIds;
+
   Map<String, dynamic> toJson() => {
     'takenAt': takenAt.toIso8601String(),
     'iq': iq,
@@ -29,6 +34,7 @@ class Attempt {
     'categoryAccuracy': {
       for (final entry in categoryAccuracy.entries) entry.key.name: entry.value,
     },
+    'itemIds': itemIds,
   };
 
   static Attempt fromJson(Map<String, dynamic> json) {
@@ -46,6 +52,11 @@ class Attempt {
       total: (json['total'] as num).toInt(),
       duration: Duration(seconds: (json['durationSeconds'] as num).toInt()),
       categoryAccuracy: accuracy,
+      itemIds:
+          (json['itemIds'] as List?)?.whereType<String>().toList(
+            growable: false,
+          ) ??
+          const [],
     );
   }
 }

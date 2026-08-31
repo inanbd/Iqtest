@@ -42,6 +42,16 @@ class HistoryStore {
     return trimmed;
   }
 
+  /// Item ids used by the most recent [sittings] attempts.
+  ///
+  /// The draw holds these back so a repeat taker meets fresh items. One
+  /// sitting is the default because the pool is sized to guarantee a
+  /// completely fresh draw at that depth, and no deeper.
+  Future<Set<String>> recentItemIds({int sittings = 1}) async {
+    final attempts = await load();
+    return {for (final attempt in attempts.take(sittings)) ...attempt.itemIds};
+  }
+
   Future<void> clear() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(_key);

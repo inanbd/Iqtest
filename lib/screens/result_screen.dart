@@ -6,6 +6,7 @@ import '../services/history_store.dart';
 import '../services/scoring.dart';
 import '../widgets/bell_curve.dart';
 import '../widgets/category_breakdown.dart';
+import 'about_screen.dart';
 import 'review_screen.dart';
 
 /// Reports the outcome of a sitting and files it in the local history.
@@ -45,6 +46,8 @@ class _ResultScreenState extends State<ResultScreen> {
           for (final entry in result.byCategory.entries)
             entry.key: entry.value.accuracy,
         },
+        // Recorded so the next sitting can draw around them.
+        itemIds: widget.questions.map((q) => q.id).toList(growable: false),
       ),
     );
   }
@@ -167,7 +170,15 @@ class _ResultScreenState extends State<ResultScreen> {
                 label: const Text('Review every answer'),
               ),
               const SizedBox(height: 12),
-              OutlinedButton(
+              OutlinedButton.icon(
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute<void>(builder: (_) => const AboutScreen()),
+                ),
+                icon: const Icon(Icons.help_outline_rounded, size: 18),
+                label: const Text('How this score was worked out'),
+              ),
+              const SizedBox(height: 12),
+              TextButton(
                 onPressed: () =>
                     Navigator.of(context).popUntil((route) => route.isFirst),
                 child: const Text('Back to start'),

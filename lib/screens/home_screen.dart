@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 import '../data/question_bank.dart';
+import '../data/test_blueprint.dart';
 import '../models/attempt.dart';
 import '../models/question.dart';
 import '../navigation.dart';
 import '../services/history_store.dart';
 import '../state/test_controller.dart';
 import '../theme/app_theme.dart';
+import 'about_screen.dart';
 import 'history_screen.dart';
 import 'quiz_screen.dart';
 
@@ -14,35 +16,38 @@ import 'quiz_screen.dart';
 enum TestFormat {
   full(
     title: 'Full assessment',
-    questionCount: 32,
+    blueprint: TestBlueprint.full,
     timeLimit: Duration(minutes: 25),
     blurb:
-        'Every item in the bank, easiest to hardest. The most reliable '
-        'reading.',
+        'A fresh draw spanning every difficulty, easiest to hardest. The '
+        'most reliable reading.',
   ),
   quick(
     title: 'Quick assessment',
-    questionCount: 16,
+    blueprint: TestBlueprint.quick,
     timeLimit: Duration(minutes: 12),
-    blurb: 'A balanced short form — four items from each domain.',
+    blurb:
+        'A balanced short form — one item per difficulty, from each of the '
+        'four domains.',
   );
 
   const TestFormat({
     required this.title,
-    required this.questionCount,
+    required this.blueprint,
     required this.timeLimit,
     required this.blurb,
   });
 
   final String title;
-  final int questionCount;
+  final TestBlueprint blueprint;
   final Duration timeLimit;
   final String blurb;
 
-  List<Question> build() => switch (this) {
-    TestFormat.full => QuestionBank.fullTest(),
-    TestFormat.quick => QuestionBank.quickTest(),
-  };
+  int get questionCount => blueprint.itemCount(QuestionCategory.values.length);
+
+  /// Draws one sitting, holding back the items in [avoid].
+  List<Question> build({Set<String> avoid = const {}}) =>
+      QuestionBank.draw(blueprint: blueprint, avoid: avoid);
 }
 
 class HomeScreen extends StatefulWidget {
@@ -85,12 +90,16 @@ class _HomeScreenState extends State<HomeScreen> with RouteAware {
     });
   }
 
-  void _start(TestFormat format) {
-    Navigator.of(context).push(
+  Future<void> _start(TestFormat format) async {
+    // Hold back whatever the last sitting used, so a repeat taker meets fresh
+    // items rather than being measured on what they remember.
+    final avoid = await _store.recentItemIds();
+    if (!mounted) return;
+    await Navigator.of(context).push(
       MaterialPageRoute<void>(
         builder: (_) => QuizScreen(
           controller: TestController(
-            questions: format.build(),
+            questions: format.build(avoid: avoid),
             timeLimit: format.timeLimit,
           ),
         ),
@@ -146,7 +155,7 @@ class _HomeScreenState extends State<HomeScreen> with RouteAware {
                   const SizedBox(height: 12),
                   const _WhatIsMeasured(),
                   const SizedBox(height: 16),
-                  const _ScoringNote(),
+                  const _AboutLink(),
                   const SizedBox(height: 20),
                   Text(
                     'This is a practice exercise for entertainment and '
@@ -448,46 +457,62 @@ class _WhatIsMeasured extends StatelessWidget {
   }
 }
 
-class _ScoringNote extends StatelessWidget {
-  const _ScoringNote();
+class _AboutLink extends StatelessWidget {
+  const _AboutLink();
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
     return Card(
-      child: ExpansionTile(
-        shape: const Border(),
-        collapsedShape: const Border(),
-        tilePadding: const EdgeInsets.symmetric(horizontal: 18),
-        childrenPadding: const EdgeInsets.fromLTRB(18, 0, 18, 18),
-        leading: Icon(
-          Icons.functions_rounded,
-          color: theme.colorScheme.primary,
-        ),
-        title: Text(
-          'How scoring works',
-          style: theme.textTheme.titleSmall?.copyWith(
-            fontWeight: FontWeight.w700,
+      child: InkWell(
+        onTap: () => Navigator.of(
+          context,
+        ).push(MaterialPageRoute<void>(builder: (_) => const AboutScreen())),
+        child: Padding(
+          padding: const EdgeInsets.all(18),
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: scheme.primary.withValues(alpha: 0.12),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Icon(
+                  Icons.functions_rounded,
+                  size: 20,
+                  color: scheme.primary,
+                ),
+              ),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'How this test works',
+                      style: theme.textTheme.titleSmall?.copyWith(
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      'How your questions are chosen, how the score is '
+                      'computed, and what it cannot tell you.',
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: scheme.onSurfaceVariant,
+                        height: 1.4,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 8),
+              Icon(Icons.chevron_right_rounded, color: scheme.onSurfaceVariant),
+            ],
           ),
         ),
-        children: [
-          Text(
-            'Each item carries a weight equal to its difficulty, so a hard '
-            'item is worth more than an easy one. Your weighted points are '
-            'divided by the points available, and that proportion is placed on '
-            'the conventional deviation scale — mean 100, standard deviation '
-            '15 — then clamped to 55–145, the range a test this short can '
-            'meaningfully separate.\n\n'
-            'The reference constants are assumed rather than measured, because '
-            'this app has no norming sample. Treat the number as a consistent '
-            'yardstick for comparing your own attempts, not as a measurement '
-            'of ability.',
-            style: theme.textTheme.bodySmall?.copyWith(
-              height: 1.55,
-              color: theme.colorScheme.onSurfaceVariant,
-            ),
-          ),
-        ],
       ),
     );
   }

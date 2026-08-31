@@ -4,7 +4,7 @@ import 'package:iq_test/models/question.dart';
 import 'package:iq_test/services/history_store.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-Attempt _attempt(int iq, {DateTime? when}) => Attempt(
+Attempt _attempt(int iq, {DateTime? when, List<String>? itemIds}) => Attempt(
   takenAt: when ?? DateTime(2026, 3, 4, 10, 30),
   iq: iq,
   correct: 20,
@@ -14,6 +14,7 @@ Attempt _attempt(int iq, {DateTime? when}) => Attempt(
     QuestionCategory.numerical: 0.75,
     QuestionCategory.spatial: 0.5,
   },
+  itemIds: itemIds ?? const ['n1', 'v1', 'l1', 's1'],
 );
 
 void main() {
@@ -64,6 +65,35 @@ void main() {
       await store.add(_attempt(90 + (i % 30)));
     }
     expect(await store.load(), hasLength(HistoryStore.maxAttempts));
+  });
+
+  test('round-trips the item ids a sitting used', () async {
+    await store.add(_attempt(110, itemIds: ['n4', 's13', 'v9']));
+    expect((await store.load()).single.itemIds, ['n4', 's13', 'v9']);
+  });
+
+  test('recentItemIds reports the last sitting by default', () async {
+    await store.add(_attempt(100, itemIds: ['a', 'b']));
+    await store.add(_attempt(105, itemIds: ['c', 'd']));
+
+    expect(await store.recentItemIds(), {'c', 'd'});
+    expect(await store.recentItemIds(sittings: 2), {'a', 'b', 'c', 'd'});
+  });
+
+  test('recentItemIds is empty with no history', () async {
+    expect(await store.recentItemIds(), isEmpty);
+  });
+
+  test('an attempt stored before item ids were recorded still loads', () async {
+    SharedPreferences.setMockInitialValues({
+      'iq_test_attempts_v1':
+          '[{"takenAt":"2026-01-02T09:00:00.000","iq":112,"correct":21,'
+          '"total":32,"durationSeconds":700,"categoryAccuracy":{}}]',
+    });
+    final loaded = await HistoryStore().load();
+    expect(loaded.single.iq, 112);
+    expect(loaded.single.itemIds, isEmpty);
+    expect(await HistoryStore().recentItemIds(), isEmpty);
   });
 
   test('clear removes everything', () async {

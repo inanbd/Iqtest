@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:iq_test/main.dart';
 import 'package:iq_test/models/figure_spec.dart';
 import 'package:iq_test/models/question.dart';
+import 'package:iq_test/screens/about_screen.dart';
 import 'package:iq_test/screens/quiz_screen.dart';
 import 'package:iq_test/screens/result_screen.dart';
 import 'package:iq_test/state/test_controller.dart';
@@ -338,5 +339,97 @@ void main() {
         '1 outlined circle',
       );
     });
+  });
+
+  testWidgets('the info page explains the draw, the score and the limits', (
+    tester,
+  ) async {
+    await tester.pumpWidget(const IqTestApp());
+    await tester.pumpAndSettle();
+
+    await tester.scrollUntilVisible(find.text('How this test works'), 200);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('How this test works'));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(AboutScreen), findsOneWidget);
+
+    // Each section is reachable by scrolling, and the numbers on the page are
+    // read from the blueprint rather than written by hand.
+    for (final heading in [
+      'What it measures',
+      'How your sitting is chosen',
+      'The blueprint',
+      'How the score is computed',
+      'What the percentile means',
+      'Where the questions come from',
+      'What it cannot tell you',
+    ]) {
+      await tester.scrollUntilVisible(find.text(heading), 200);
+      expect(find.text(heading), findsOneWidget, reason: heading);
+    }
+
+    await tester.scrollUntilVisible(find.text('The blueprint'), -200);
+    await tester.pumpAndSettle();
+    expect(find.text('Points available'), findsOneWidget);
+    expect(find.text('108'), findsOneWidget, reason: 'full sitting weight');
+    expect(find.text('56'), findsOneWidget, reason: 'quick sitting weight');
+  });
+
+  testWidgets('a second sitting reuses none of the first sitting\'s items', (
+    tester,
+  ) async {
+    Future<List<String>> takeQuickTest() async {
+      // After the first sitting the home screen gains a stats card, which
+      // pushes the format cards down out of the built viewport.
+      await tester.scrollUntilVisible(find.text('Quick assessment'), 150);
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Quick assessment'));
+      await tester.pumpAndSettle();
+
+      final ids = <String>[];
+      for (var i = 0; i < 16; i++) {
+        ids.add(
+          tester
+              .widget<QuizScreen>(find.byType(QuizScreen))
+              .controller
+              .currentQuestion
+              .id,
+        );
+        await _answerFirstOption(tester);
+        if (i < 15) {
+          await tester.tap(find.text('Next'));
+          await tester.pumpAndSettle();
+        }
+      }
+
+      await tester.tap(find.text('Submit'));
+      await tester.pumpAndSettle();
+      await tester.tap(
+        find.descendant(
+          of: find.byType(AlertDialog),
+          matching: find.text('Submit'),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.byType(ResultScreen), findsOneWidget);
+      return ids;
+    }
+
+    await tester.pumpWidget(const IqTestApp());
+    await tester.pumpAndSettle();
+
+    final first = await takeQuickTest();
+    await tester.tap(find.text('Done'));
+    await tester.pumpAndSettle();
+    final second = await takeQuickTest();
+
+    expect(first.toSet(), hasLength(16));
+    expect(second.toSet(), hasLength(16));
+    expect(
+      first.toSet().intersection(second.toSet()),
+      isEmpty,
+      reason: 'the second sitting should draw around the first',
+    );
   });
 }
